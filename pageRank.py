@@ -57,9 +57,3 @@ for j in range(numNodes):
             outCount += 1
     nodesPointingTo.append(outCount)
 
-
-
-
-
-
-
