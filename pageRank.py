@@ -49,11 +49,31 @@ print("pageRankPrev:",pageRankPrev)
 pageRank = [0] * numNodes
 print("pageRank",pageRank)
 
-nodesPointingTo = []
+howManyOutlinks = []
 for j in range(numNodes):
     outCount = 0
     for elem in graph:
         if elem[0] == j + 1:
             outCount += 1
-    nodesPointingTo.append(outCount)
+    howManyOutlinks.append(outCount)
 
+# nodes pointing at node of current page
+pointingNodes = []
+for j in range(numNodes):
+    lst = []
+    for elem in graph:
+        if elem[1] == j + 1:
+            lst.append(elem[0])
+    pointingNodes.append(lst)
+print("Quienes le apuntan al nodo Pi:",pointingNodes)
+
+for k in range(iters):
+    for i in range(numNodes):
+        sum = 0
+        for elem in pointingNodes[i]:
+            sum += pageRankPrev[elem - 1] / howManyOutlinks[elem - 1]
+        pageRank[i-1] = sum
+
+    pageRankPrev = pageRank.copy()
+
+print(pageRankPrev)
